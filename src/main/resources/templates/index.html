@@ -3,25 +3,31 @@
 <head>
     <meta charset="UTF-8"/>
     <title>Recipe Home</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
-<h1 th:text="'My Recipes'">My Recipes!</h1>
 
-<table>
-    <thead>
-    <tr>
-        <th>Index</th>
-        <th>Description</th>
-        <th>Directions</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="recipe : ${recipes}">
-        <td style="width:5%" th:text="${recipe.getId()}">1</td>
-        <td style="width:10%" th:text="${recipe.getDescription()}">Description</td>
-        <td style="width:50%" th:text="${recipe.getDirections()}">Directions</td>
-    </tr>
-    </tbody>
-</table>
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-md-8 offset-md-2 card card-body">
+            <h2 class="card-title" th:text="'My Recipes'">My Recipes!</h2>
+            <table class="table table-hover">
+                <thead class="thead-dark">
+                <tr>
+                    <th>Index</th>
+                    <th>Description</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="recipe : ${recipes}">
+                    <td th:text="${recipe.getId()}">1</td>
+                    <td th:text="${recipe.getDescription()}">Description</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 </body>
 </html>
