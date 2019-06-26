@@ -38,4 +38,39 @@ public class Notes {
     public void setNotes(String notes) {
         this.notes = notes;
     }
+
+    public static NotesBuilder builder() {
+        return new NotesBuilder();
+    }
+
+    public static final class NotesBuilder {
+        private Long id;
+        private Recipe recipe;
+        private String notes;
+
+        private NotesBuilder() {}
+
+        public NotesBuilder id(Long id) {
+            this.id = id;
+            return this;
+        }
+
+        public NotesBuilder recipe(Recipe recipe) {
+            this.recipe = recipe;
+            return this;
+        }
+
+        public NotesBuilder notes(String notes) {
+            this.notes = notes;
+            return this;
+        }
+
+        public Notes build() {
+            Notes notes = new Notes();
+            notes.setId(id);
+            notes.setRecipe(recipe);
+            notes.setNotes(this.notes);
+            return notes;
+        }
+    }
 }

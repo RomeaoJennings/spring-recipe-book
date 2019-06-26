@@ -53,8 +53,12 @@ public class IndexControllerTest {
         //Given
         UnitOfMeasure unitOfMeasure = new UnitOfMeasure();
         unitOfMeasure.setDescription("Teaspoon");
-        Ingredient ingredient = new Ingredient("Test Spice",
-                new BigDecimal(2), unitOfMeasure);
+        Ingredient ingredient = Ingredient.builder()
+                .description("Test Spice")
+                .amount(2)
+                .unitOfMeasure(unitOfMeasure)
+                .build();
+
         Recipe recipe = new Recipe();
         recipe.addIngredients(ingredient);
         Set<Recipe> recipeSet = new HashSet<>();

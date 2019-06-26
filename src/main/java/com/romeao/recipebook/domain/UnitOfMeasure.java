@@ -26,4 +26,32 @@ public class UnitOfMeasure {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    public static UnitOfMeasureBuilder builder() {
+        return new UnitOfMeasureBuilder();
+    }
+
+    public static final class UnitOfMeasureBuilder {
+        private Long id;
+        private String description;
+
+        private UnitOfMeasureBuilder() {}
+
+        public UnitOfMeasureBuilder id(Long id) {
+            this.id = id;
+            return this;
+        }
+
+        public UnitOfMeasureBuilder description(String description) {
+            this.description = description;
+            return this;
+        }
+
+        public UnitOfMeasure build() {
+            UnitOfMeasure unitOfMeasure = new UnitOfMeasure();
+            unitOfMeasure.setId(id);
+            unitOfMeasure.setDescription(description);
+            return unitOfMeasure;
+        }
+    }
 }

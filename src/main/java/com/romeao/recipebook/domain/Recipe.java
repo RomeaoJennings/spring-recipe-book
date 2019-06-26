@@ -152,4 +152,113 @@ public class Recipe {
             ingredients.add(ingredient);
         }
     }
+
+    public static RecipeBuilder builder() {
+        return new RecipeBuilder();
+    }
+
+    public static final class RecipeBuilder {
+        private Long id;
+        private String description;
+        private Integer prepTime;
+        private Integer cookTime;
+        private Integer servings;
+        private String source;
+        private String url;
+        private String directions;
+        private Difficulty difficulty;
+        private Set<Category> categories = new HashSet<>();
+        private Set<Ingredient> ingredients = new HashSet<>();
+        private Byte[] image;
+        private Notes notes;
+
+        private RecipeBuilder() {}
+
+        public RecipeBuilder id(Long id) {
+            this.id = id;
+            return this;
+        }
+
+        public RecipeBuilder description(String description) {
+            this.description = description;
+            return this;
+        }
+
+        public RecipeBuilder prepTime(Integer prepTime) {
+            this.prepTime = prepTime;
+            return this;
+        }
+
+        public RecipeBuilder cookTime(Integer cookTime) {
+            this.cookTime = cookTime;
+            return this;
+        }
+
+        public RecipeBuilder servings(Integer servings) {
+            this.servings = servings;
+            return this;
+        }
+
+        public RecipeBuilder source(String source) {
+            this.source = source;
+            return this;
+        }
+
+        public RecipeBuilder url(String url) {
+            this.url = url;
+            return this;
+        }
+
+        public RecipeBuilder directions(String directions) {
+            this.directions = directions;
+            return this;
+        }
+
+        public RecipeBuilder difficulty(Difficulty difficulty) {
+            this.difficulty = difficulty;
+            return this;
+        }
+
+        public RecipeBuilder addCategories(Category... categories) {
+            for (Category category : categories) {
+                this.categories.add(category);
+            }
+            return this;
+        }
+
+        public RecipeBuilder addIngredients(Ingredient... ingredients) {
+            for (Ingredient ingredient : ingredients) {
+                this.ingredients.add(ingredient);
+            }
+            return this;
+        }
+
+        public RecipeBuilder image(Byte[] image) {
+            this.image = image;
+            return this;
+        }
+
+        public RecipeBuilder notes(Notes notes) {
+            this.notes = notes;
+            return this;
+        }
+
+        public Recipe build() {
+            Recipe recipe = new Recipe();
+            recipe.setId(id);
+            recipe.setDescription(description);
+            recipe.setPrepTime(prepTime);
+            recipe.setCookTime(cookTime);
+            recipe.setServings(servings);
+            recipe.setSource(source);
+            recipe.setUrl(url);
+            recipe.setDirections(directions);
+            recipe.setDifficulty(difficulty);
+            recipe.setCategories(categories);
+            recipe.setIngredients(ingredients);
+            recipe.setImage(image);
+            recipe.setNotes(notes);
+            return recipe;
+        }
+    }
 }

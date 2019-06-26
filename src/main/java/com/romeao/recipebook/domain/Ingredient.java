@@ -20,12 +20,6 @@ public class Ingredient {
 
     public Ingredient() {}
 
-    public Ingredient(String description, BigDecimal amount, UnitOfMeasure unitOfMeasure) {
-        this.description = description;
-        this.amount = amount;
-        this.unitOfMeasure = unitOfMeasure;
-    }
-
     public Long getId() {
         return id;
     }
@@ -64,5 +58,59 @@ public class Ingredient {
 
     public void setUnitOfMeasure(UnitOfMeasure unitOfMeasure) {
         this.unitOfMeasure = unitOfMeasure;
+    }
+
+    public static IngredientBuilder builder() {
+        return new IngredientBuilder();
+    }
+
+    public final static class IngredientBuilder {
+        private Long id;
+        private String description;
+        private BigDecimal amount;
+        private Recipe recipe;
+        private UnitOfMeasure unitOfMeasure;
+
+        private IngredientBuilder() {}
+
+        public IngredientBuilder id(Long id) {
+            this.id = id;
+            return this;
+        }
+
+        public IngredientBuilder description(String description) {
+            this.description = description;
+            return this;
+        }
+
+        public IngredientBuilder amount(int amount) {
+            this.amount = new BigDecimal(amount);
+            return this;
+        }
+
+        public IngredientBuilder amount(double amount) {
+            this.amount = new BigDecimal(amount);
+            return this;
+        }
+
+        public IngredientBuilder recipe(Recipe recipe) {
+            this.recipe = recipe;
+            return this;
+        }
+
+        public IngredientBuilder unitOfMeasure(UnitOfMeasure unitOfMeasure) {
+            this.unitOfMeasure = unitOfMeasure;
+            return this;
+        }
+
+        public Ingredient build() {
+            Ingredient ingredient = new Ingredient();
+            ingredient.setId(id);
+            ingredient.setRecipe(recipe);
+            ingredient.setAmount(amount);
+            ingredient.setDescription(description);
+            ingredient.setUnitOfMeasure(unitOfMeasure);
+            return ingredient;
+        }
     }
 }

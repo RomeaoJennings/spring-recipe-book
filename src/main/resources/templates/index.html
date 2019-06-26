@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8"/>
     <title>Recipe Home</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous"
           th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}"/>
     <link rel="stylesheet" href="/webjars/jquery/3.0.0/jquery.min.js"/>
 </head>
@@ -17,14 +19,26 @@
             <table class="table table-hover">
                 <thead class="thead-dark">
                 <tr>
-                    <th>Index</th>
+                    <th>ID</th>
                     <th>Description</th>
+                    <th>View</th>
                 </tr>
                 </thead>
                 <tbody>
+                <tr th:remove="all">
+                    <td>123</td>
+                    <td>Tasty Goodness 1</td>
+                    <td><a href="#">View</a></td>
+                </tr>
+                <tr th:remove="all">
+                    <td>456</td>
+                    <td>Tasty Goodness 2</td>
+                    <td><a href="#">View</a></td>
+                </tr>
                 <tr th:each="recipe : ${recipes}">
-                    <td th:text="${recipe.getId()}">1</td>
-                    <td th:text="${recipe.getDescription()}">Description</td>
+                    <td th:text="${recipe.getId()}">789</td>
+                    <td th:text="${recipe.getDescription()}">Tasty Goodness 3</td>
+                    <td><a href="#" th:href="@{'/recipe/show/' + ${recipe.id}}">View</a></td>
                 </tr>
                 </tbody>
             </table>
