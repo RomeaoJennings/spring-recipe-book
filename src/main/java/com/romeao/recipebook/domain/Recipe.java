@@ -1,6 +1,7 @@
 package com.romeao.recipebook.domain;
 
 import javax.persistence.*;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -38,6 +39,10 @@ public class Recipe {
 
     @OneToOne(cascade = CascadeType.ALL)
     private Notes notes;
+
+    public static RecipeBuilder builder() {
+        return new RecipeBuilder();
+    }
 
     public Long getId() {
         return id;
@@ -153,10 +158,6 @@ public class Recipe {
         }
     }
 
-    public static RecipeBuilder builder() {
-        return new RecipeBuilder();
-    }
-
     public static final class RecipeBuilder {
         private Long id;
         private String description;
@@ -220,16 +221,13 @@ public class Recipe {
         }
 
         public RecipeBuilder addCategories(Category... categories) {
-            for (Category category : categories) {
-                this.categories.add(category);
-            }
+            this.categories.addAll(Arrays.asList(categories));
+
             return this;
         }
 
         public RecipeBuilder addIngredients(Ingredient... ingredients) {
-            for (Ingredient ingredient : ingredients) {
-                this.ingredients.add(ingredient);
-            }
+            this.ingredients.addAll(Arrays.asList(ingredients));
             return this;
         }
 
@@ -258,6 +256,9 @@ public class Recipe {
             recipe.setIngredients(ingredients);
             recipe.setImage(image);
             recipe.setNotes(notes);
+
+            for (Ingredient ingredient : recipe.getIngredients()) { ingredient.setRecipe(recipe); }
+
             return recipe;
         }
     }
