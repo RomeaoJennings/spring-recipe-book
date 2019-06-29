@@ -94,6 +94,11 @@ public class Ingredient {
             return this;
         }
 
+        public IngredientBuilder amount(BigDecimal amount) {
+            this.amount = amount;
+            return this;
+        }
+
         public IngredientBuilder recipe(Recipe recipe) {
             this.recipe = recipe;
             return this;

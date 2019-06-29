@@ -158,6 +158,16 @@ public class Recipe {
         }
     }
 
+    public void addCategories(Category... allCategories) {
+        for (Category category : allCategories) {
+            if (category == null) {
+                throw new IllegalArgumentException("Cannot add null Category to recipe.");
+            }
+            category.getRecipes().add(this);
+            categories.add(category);
+        }
+    }
+
     public static final class RecipeBuilder {
         private Long id;
         private String description;
