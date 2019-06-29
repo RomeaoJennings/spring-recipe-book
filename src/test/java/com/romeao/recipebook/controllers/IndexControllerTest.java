@@ -12,7 +12,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.ui.Model;
 
-import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -70,7 +69,7 @@ public class IndexControllerTest {
 
         //then
         assertEquals("index", result);
-        verify(model, times(1)).addAttribute(eq("recipes"), eq(recipeSet));
+        verify(model, times(1)).addAttribute(eq("recipe"), eq(recipeSet));
         verify(recipeService, times(1)).getAllRecipes();
     }
 }

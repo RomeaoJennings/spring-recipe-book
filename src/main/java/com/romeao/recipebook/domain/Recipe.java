@@ -38,7 +38,7 @@ public class Recipe {
     private Byte[] image;
 
     @OneToOne(cascade = CascadeType.ALL)
-    private Notes notes;
+    private Notes notes = new Notes();
 
     public static RecipeBuilder builder() {
         return new RecipeBuilder();
@@ -181,7 +181,7 @@ public class Recipe {
         private Set<Category> categories = new HashSet<>();
         private Set<Ingredient> ingredients = new HashSet<>();
         private Byte[] image;
-        private Notes notes;
+        private Notes notes = new Notes();
 
         private RecipeBuilder() {}
 

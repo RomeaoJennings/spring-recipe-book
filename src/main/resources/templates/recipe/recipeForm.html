@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+   <meta charset="UTF-8"/>
+   <title>Show Recipe</title>
+   <link crossorigin="anonymous"
+         href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+         rel="stylesheet" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}"/>
+</head>
+<body>
+<div class="container-fluid">
+   <div class="row">
+      <div class="col-md-10 offset-md-1">
+         <form method="post" th:action="@{/recipe/}" th:object="${recipe}">
+            <div class="card my-2">
+               <div class="card-header bg-primary text-white">
+                  <h3 class="card-title mb-0">Edit Recipe Information</h3>
+               </div>
+               <div class="card-body">
+                  <input th:field="*{id}" type="hidden"/>
+                  <div class="form-group col-md-6">
+                     <label for="recipeDescription">Recipe Description:</label>
+                     <input class="form-control" id="recipeDescription"
+                            placeholder="Recipe Description"
+                            th:field="*{description}" type="text">
+                  </div>
+                  <div class="form-group col-md-6">
+                     <label>Categories:</label>
+                     <div class="form-check">
+                        <input class="form-check-input" id="defaultCheck1" type="checkbox" value="">
+                        <label class="form-check-label" for="defaultCheck1">
+                           American
+                        </label>
+                     </div>
+                     <div class="form-check">
+                        <input class="form-check-input" id="defaultCheck2" type="checkbox" value="">
+                        <label class="form-check-label" for="defaultCheck2">
+                           Italian
+                        </label>
+                     </div>
+                     <div class="form-check">
+                        <input class="form-check-input" id="defaultCheck3" type="checkbox" value="">
+                        <label class="form-check-label" for="defaultCheck3">
+                           Mexican
+                        </label>
+                     </div>
+                  </div>
+                  <div class="form-row">
+                     <div class="col-md-6 form-group">
+                        <label for="recipePrepTime">Prep Time:</label>
+                        <input class="form-control" id="recipePrepTime" placeholder="Prep Time"
+                               th:field="*{prepTime}" type="text">
+                     </div>
+                     <div class="col-md-6 form-group">
+                        <label for="recipeCookTime">Cook Time:</label>
+                        <input class="form-control" id="recipeCookTime" placeholder="Cook Time"
+                               th:field="*{cookTime}" type="text">
+                     </div>
+                  </div>
+                  <div class="form-row">
+                     <div class="col-md-6 form-group">
+                        <label for="recipeServings">Servings:</label>
+                        <input class="form-control" id="recipeServings"
+                               placeholder="Number of Servings"
+                               th:field="*{servings}" type="text">
+                     </div>
+                     <div class="col-md-6 form-group">
+                        <label for="recipeDifficulty">Difficulty:</label>
+                        <select class="form-control" id="recipeDifficulty">
+                           <option>Easy</option>
+                           <option>Moderate</option>
+                           <option>Hard</option>
+                        </select>
+                     </div>
+                  </div>
+                  <div class="form-row">
+                     <div class="col-md-6 form-group">
+                        <label for="recipeSource">Source:</label>
+                        <input class="form-control" id="recipeSource" placeholder="Source"
+                               th:field="*{source}" type="text">
+                     </div>
+                     <div class="col-md-6 form-group">
+                        <label for="recipeUrl">Url:</label>
+                        <input class="form-control" id="recipeUrl" placeholder="Url"
+                               th:field="*{url}"
+                               type="text">
+                     </div>
+                  </div>
+                  <div class="form-group">
+                     <label for="recipeDirections">Directions:</label>
+                     <textarea class="form-control" id="recipeDirections"
+                               placeholder="Enter Directions Here"
+                               rows="6"
+                               th:field="*{directions}"></textarea>
+                  </div>
+
+                  <div class="form-group">
+                     <label for="recipeNotes">Notes</label>
+                     <textarea class="form-control" id="recipeNotes" placeholder="Enter Notes Here"
+                               rows="4" th:field="*{notes.notes}"></textarea>
+                  </div>
+               </div>
+            </div>
+            <div class="card mb-2">
+               <div class="card-header bg-primary text-white">
+                  <h3 class="card-title mb-0">Ingredients</h3>
+               </div>
+               <div class="card-body">
+                  <div class="row">
+                     <div class="col-md-12">
+                        <ul>
+                           <li th:each="ingredient : ${recipe.ingredients}"
+                               th:text="${ingredient.description}">1 Cup of milk
+                           </li>
+                           <li th:remove="all">1 Teaspoon of chocolate</li>
+                           <li th:remove="all">1 Teaspoon of Sugar</li>
+                        </ul>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <button class="btn btn-primary" type="submit">Submit</button>
+         </form>
+      </div>
+   </div>
+</div>
+<script crossorigin="anonymous"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        th:src="@{/webjars/jquery/3.0.0/jquery.min.js}"></script>
+<script crossorigin="anonymous"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        th:src="@{/webjars/popper.js/1.14.3/popper.min.js}"></script>
+<script crossorigin="anonymous"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
+</body>
+</html>

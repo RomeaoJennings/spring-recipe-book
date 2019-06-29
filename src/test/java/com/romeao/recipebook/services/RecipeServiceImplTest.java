@@ -1,5 +1,6 @@
 package com.romeao.recipebook.services;
 
+import com.romeao.recipebook.converters.*;
 import com.romeao.recipebook.domain.Recipe;
 import com.romeao.recipebook.repositories.RecipeRepository;
 import org.junit.Before;
@@ -31,7 +32,13 @@ public class RecipeServiceImplTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        recipeService = new RecipeServiceImpl(recipeRepository);
+        recipeService = new RecipeServiceImpl(recipeRepository,
+                new RecipeCommandToRecipe(new IngredientCommandToIngredient(
+                        new UnitOfMeasureCommandToUnitOfMeasure()),
+                        new CategoryCommandToCategory(), new NotesCommandToNotes()),
+                new RecipeToRecipeCommand(new NotesToNotesCommand(),
+                        new IngredientToIngredientCommand(new UnitOfMeasureToUnitOfMeasureCommand()),
+                        new CategoryToCategoryCommand()));
 
         recipes = new ArrayList<>();
         recipes.add(Recipe.builder().id(FIRST_ID).description("Recipe1").build());
