@@ -1,22 +1,22 @@
-package com.romeao.recipebook.converters;
+package com.romeao.recipebook.dto.converters;
 
-import com.romeao.recipebook.commands.IngredientCommand;
 import com.romeao.recipebook.domain.Ingredient;
+import com.romeao.recipebook.dto.IngredientDto;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
 @Component
-public class IngredientToIngredientCommand implements Converter<Ingredient, IngredientCommand> {
-    private final UnitOfMeasureToUnitOfMeasureCommand unitOfMeasureConverter;
+public class IngredientToIngredientDto implements Converter<Ingredient, IngredientDto> {
+    private final UnitOfMeasureToUnitOfMeasureDto unitOfMeasureConverter;
 
-    public IngredientToIngredientCommand(UnitOfMeasureToUnitOfMeasureCommand unitOfMeasureConverter) {
+    public IngredientToIngredientDto(UnitOfMeasureToUnitOfMeasureDto unitOfMeasureConverter) {
         this.unitOfMeasureConverter = unitOfMeasureConverter;
     }
 
     @Override
-    public IngredientCommand convert(Ingredient ingredient) {
+    public IngredientDto convert(Ingredient ingredient) {
         if (ingredient == null) { return null; } else {
-            IngredientCommand command = new IngredientCommand();
+            IngredientDto command = new IngredientDto();
             command.setId(ingredient.getId());
             command.setAmount(ingredient.getAmount());
             command.setDescription(ingredient.getDescription());

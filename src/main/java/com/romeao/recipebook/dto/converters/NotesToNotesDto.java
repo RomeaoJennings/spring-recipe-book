@@ -1,16 +1,16 @@
-package com.romeao.recipebook.converters;
+package com.romeao.recipebook.dto.converters;
 
-import com.romeao.recipebook.commands.NotesCommand;
 import com.romeao.recipebook.domain.Notes;
+import com.romeao.recipebook.dto.NotesDto;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
 @Component
-public class NotesToNotesCommand implements Converter<Notes, NotesCommand> {
+public class NotesToNotesDto implements Converter<Notes, NotesDto> {
     @Override
-    public NotesCommand convert(Notes notes) {
+    public NotesDto convert(Notes notes) {
         if (notes == null) { return null; } else {
-            NotesCommand command = new NotesCommand();
+            NotesDto command = new NotesDto();
             command.setId(notes.getId());
             command.setNotes(notes.getNotes());
             return command;

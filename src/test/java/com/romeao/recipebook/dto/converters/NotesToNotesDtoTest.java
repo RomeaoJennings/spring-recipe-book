@@ -1,18 +1,18 @@
-package com.romeao.recipebook.converters;
+package com.romeao.recipebook.dto.converters;
 
-import com.romeao.recipebook.commands.NotesCommand;
 import com.romeao.recipebook.domain.Notes;
+import com.romeao.recipebook.dto.NotesDto;
 import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class NotesToNotesCommandTest {
+public class NotesToNotesDtoTest {
 
     private static final Long ID = 273L;
     private static final String NOTES = "testNotes";
 
-    private NotesToNotesCommand notesToNotesCommand = new NotesToNotesCommand();
+    private NotesToNotesDto notesToNotesDto = new NotesToNotesDto();
     private Notes notes;
 
     @Before
@@ -25,12 +25,12 @@ public class NotesToNotesCommandTest {
 
     @Test
     public void nullObject() {
-        assertNull(notesToNotesCommand.convert(null));
+        assertNull(notesToNotesDto.convert(null));
     }
 
     @Test
     public void convert() {
-        NotesCommand command = notesToNotesCommand.convert(notes);
+        NotesDto command = notesToNotesDto.convert(notes);
         assertNotNull(command);
         assertEquals(ID, command.getId());
         assertEquals(NOTES, command.getNotes());

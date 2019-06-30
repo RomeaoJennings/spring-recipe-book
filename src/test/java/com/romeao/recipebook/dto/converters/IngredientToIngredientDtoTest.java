@@ -1,8 +1,8 @@
-package com.romeao.recipebook.converters;
+package com.romeao.recipebook.dto.converters;
 
-import com.romeao.recipebook.commands.IngredientCommand;
 import com.romeao.recipebook.domain.Ingredient;
 import com.romeao.recipebook.domain.UnitOfMeasure;
+import com.romeao.recipebook.dto.IngredientDto;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -10,15 +10,15 @@ import java.math.BigDecimal;
 
 import static org.junit.Assert.*;
 
-public class IngredientToIngredientCommandTest {
+public class IngredientToIngredientDtoTest {
 
     private static final Long ID = 816L;
     private static final BigDecimal AMOUNT = new BigDecimal(3.14);
     private static final String DESCRIPTION = "testDescription";
     private static final UnitOfMeasure UOM = UnitOfMeasure.builder().id(1L).build();
 
-    private IngredientToIngredientCommand ingredientToIngredientCommand =
-            new IngredientToIngredientCommand(new UnitOfMeasureToUnitOfMeasureCommand());
+    private IngredientToIngredientDto ingredientToIngredientDto =
+            new IngredientToIngredientDto(new UnitOfMeasureToUnitOfMeasureDto());
 
     private Ingredient ingredient;
 
@@ -33,12 +33,12 @@ public class IngredientToIngredientCommandTest {
 
     @Test
     public void nullObject() {
-        assertNull(ingredientToIngredientCommand.convert(null));
+        assertNull(ingredientToIngredientDto.convert(null));
     }
 
     @Test
     public void convert() {
-        IngredientCommand command = ingredientToIngredientCommand.convert(ingredient);
+        IngredientDto command = ingredientToIngredientDto.convert(ingredient);
         assertNotNull(command);
         assertEquals(ID, command.getId());
         assertEquals(DESCRIPTION, command.getDescription());

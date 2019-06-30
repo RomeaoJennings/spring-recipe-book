@@ -1,11 +1,11 @@
-package com.romeao.recipebook.commands;
+package com.romeao.recipebook.dto;
 
 import com.romeao.recipebook.domain.Difficulty;
 
 import java.util.HashSet;
 import java.util.Set;
 
-public class RecipeCommand {
+public class RecipeDto {
     private Long id;
     private String description;
     private Integer prepTime;
@@ -14,10 +14,10 @@ public class RecipeCommand {
     private String source;
     private String url;
     private String directions;
-    private Set<IngredientCommand> ingredients = new HashSet<>();
+    private Set<IngredientDto> ingredients = new HashSet<>();
     private Difficulty difficulty;
-    private NotesCommand notes;
-    private Set<CategoryCommand> categories = new HashSet<>();
+    private NotesDto notes;
+    private Set<CategoryDto> categories = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -83,11 +83,11 @@ public class RecipeCommand {
         this.directions = directions;
     }
 
-    public Set<IngredientCommand> getIngredients() {
+    public Set<IngredientDto> getIngredients() {
         return ingredients;
     }
 
-    public void setIngredients(Set<IngredientCommand> ingredients) {
+    public void setIngredients(Set<IngredientDto> ingredients) {
         this.ingredients = ingredients;
     }
 
@@ -99,19 +99,19 @@ public class RecipeCommand {
         this.difficulty = difficulty;
     }
 
-    public NotesCommand getNotes() {
+    public NotesDto getNotes() {
         return notes;
     }
 
-    public void setNotes(NotesCommand notes) {
+    public void setNotes(NotesDto notes) {
         this.notes = notes;
     }
 
-    public Set<CategoryCommand> getCategories() {
+    public Set<CategoryDto> getCategories() {
         return categories;
     }
 
-    public void setCategories(Set<CategoryCommand> categories) {
+    public void setCategories(Set<CategoryDto> categories) {
         this.categories = categories;
     }
 }

@@ -1,9 +1,9 @@
 package com.romeao.recipebook.services;
 
-import com.romeao.recipebook.commands.RecipeCommand;
-import com.romeao.recipebook.converters.RecipeCommandToRecipe;
-import com.romeao.recipebook.converters.RecipeToRecipeCommand;
 import com.romeao.recipebook.domain.Recipe;
+import com.romeao.recipebook.dto.RecipeDto;
+import com.romeao.recipebook.dto.converters.RecipeDtoToRecipe;
+import com.romeao.recipebook.dto.converters.RecipeToRecipeDto;
 import com.romeao.recipebook.repositories.RecipeRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,15 +18,15 @@ public class RecipeServiceImpl implements RecipeService {
 
     private final Logger log = LoggerFactory.getLogger(RecipeServiceImpl.class);
     private final RecipeRepository recipeRepository;
-    private final RecipeCommandToRecipe recipeCommandToRecipe;
-    private final RecipeToRecipeCommand recipeToRecipeCommand;
+    private final RecipeDtoToRecipe recipeDtoToRecipe;
+    private final RecipeToRecipeDto recipeToRecipeDto;
 
     public RecipeServiceImpl(RecipeRepository recipeRepository,
-                             RecipeCommandToRecipe recipeCommandToRecipe,
-                             RecipeToRecipeCommand recipeToRecipeCommand) {
+                             RecipeDtoToRecipe recipeDtoToRecipe,
+                             RecipeToRecipeDto recipeToRecipeDto) {
         this.recipeRepository = recipeRepository;
-        this.recipeCommandToRecipe = recipeCommandToRecipe;
-        this.recipeToRecipeCommand = recipeToRecipeCommand;
+        this.recipeDtoToRecipe = recipeDtoToRecipe;
+        this.recipeToRecipeDto = recipeToRecipeDto;
     }
 
     @Override
@@ -43,10 +43,10 @@ public class RecipeServiceImpl implements RecipeService {
     }
 
     @Override
-    public RecipeCommand saveRecipeCommand(RecipeCommand recipeCommand) {
-        Recipe recipe = recipeCommandToRecipe.convert(recipeCommand);
+    public RecipeDto saveRecipeDto(RecipeDto recipeDto) {
+        Recipe recipe = recipeDtoToRecipe.convert(recipeDto);
         recipeRepository.save(recipe);
         log.info("Saved recipe with id: {}", recipe.getId());
-        return recipeToRecipeCommand.convert(recipe);
+        return recipeToRecipeDto.convert(recipe);
     }
 }

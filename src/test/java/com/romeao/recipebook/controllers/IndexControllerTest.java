@@ -69,7 +69,7 @@ public class IndexControllerTest {
 
         //then
         assertEquals("index", result);
-        verify(model, times(1)).addAttribute(eq("recipe"), eq(recipeSet));
+        verify(model, times(1)).addAttribute(eq("recipes"), eq(recipeSet));
         verify(recipeService, times(1)).getAllRecipes();
     }
 }

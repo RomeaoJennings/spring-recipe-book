@@ -1,29 +1,29 @@
-package com.romeao.recipebook.converters;
+package com.romeao.recipebook.dto.converters;
 
-import com.romeao.recipebook.commands.RecipeCommand;
 import com.romeao.recipebook.domain.Recipe;
+import com.romeao.recipebook.dto.RecipeDto;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
 @Component
-public class RecipeToRecipeCommand implements Converter<Recipe, RecipeCommand> {
-    private final NotesToNotesCommand notesConverter;
-    private final IngredientToIngredientCommand ingredientConverter;
-    private final CategoryToCategoryCommand categoryConverter;
+public class RecipeToRecipeDto implements Converter<Recipe, RecipeDto> {
+    private final NotesToNotesDto notesConverter;
+    private final IngredientToIngredientDto ingredientConverter;
+    private final CategoryToCategoryDto categoryConverter;
 
-    public RecipeToRecipeCommand(NotesToNotesCommand notesConverter,
-                                 IngredientToIngredientCommand ingredientConverter,
-                                 CategoryToCategoryCommand categoryConverter) {
+    public RecipeToRecipeDto(NotesToNotesDto notesConverter,
+                             IngredientToIngredientDto ingredientConverter,
+                             CategoryToCategoryDto categoryConverter) {
         this.notesConverter = notesConverter;
         this.ingredientConverter = ingredientConverter;
         this.categoryConverter = categoryConverter;
     }
 
     @Override
-    public RecipeCommand convert(Recipe recipe) {
+    public RecipeDto convert(Recipe recipe) {
         if (recipe == null) { return null; }
 
-        RecipeCommand command = new RecipeCommand();
+        RecipeDto command = new RecipeDto();
         command.setId(recipe.getId());
         command.setDescription(recipe.getDescription());
         command.setCookTime(recipe.getCookTime());

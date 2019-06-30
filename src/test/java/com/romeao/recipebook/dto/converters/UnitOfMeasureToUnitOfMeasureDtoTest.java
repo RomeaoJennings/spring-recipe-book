@@ -1,19 +1,19 @@
-package com.romeao.recipebook.converters;
+package com.romeao.recipebook.dto.converters;
 
-import com.romeao.recipebook.commands.UnitOfMeasureCommand;
 import com.romeao.recipebook.domain.UnitOfMeasure;
+import com.romeao.recipebook.dto.UnitOfMeasureDto;
 import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class UnitOfMeasureToUnitOfMeasureCommandTest {
+public class UnitOfMeasureToUnitOfMeasureDtoTest {
 
     private static final Long ID = 1234L;
     private static final String DESCRIPTION = "testDescription";
 
-    private UnitOfMeasureToUnitOfMeasureCommand unitOfMeasureToUnitOfMeasureCommand
-            = new UnitOfMeasureToUnitOfMeasureCommand();
+    private UnitOfMeasureToUnitOfMeasureDto unitOfMeasureToUnitOfMeasureDto
+            = new UnitOfMeasureToUnitOfMeasureDto();
     private UnitOfMeasure unitOfMeasure;
 
     @Before
@@ -26,12 +26,12 @@ public class UnitOfMeasureToUnitOfMeasureCommandTest {
 
     @Test
     public void nullObject() {
-        assertNull(unitOfMeasureToUnitOfMeasureCommand.convert(null));
+        assertNull(unitOfMeasureToUnitOfMeasureDto.convert(null));
     }
 
     @Test
     public void convert() {
-        UnitOfMeasureCommand command = unitOfMeasureToUnitOfMeasureCommand.convert(unitOfMeasure);
+        UnitOfMeasureDto command = unitOfMeasureToUnitOfMeasureDto.convert(unitOfMeasure);
 
         assertNotNull(command);
         assertEquals(ID, command.getId());

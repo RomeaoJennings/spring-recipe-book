@@ -1,13 +1,13 @@
-package com.romeao.recipebook.converters;
+package com.romeao.recipebook.dto.converters;
 
-import com.romeao.recipebook.commands.RecipeCommand;
 import com.romeao.recipebook.domain.*;
+import com.romeao.recipebook.dto.RecipeDto;
 import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class RecipeToRecipeCommandTest {
+public class RecipeToRecipeDtoTest {
 
     private static final Long ID = 25L;
     private static final String DESCRIPTION = "test_description";
@@ -20,10 +20,10 @@ public class RecipeToRecipeCommandTest {
     private static final Difficulty DIFFICULTY = Difficulty.MODERATE;
     private static final Notes NOTES = new Notes();
 
-    private RecipeToRecipeCommand recipeToRecipeCommand = new RecipeToRecipeCommand(
-            new NotesToNotesCommand(),
-            new IngredientToIngredientCommand(new UnitOfMeasureToUnitOfMeasureCommand()),
-            new CategoryToCategoryCommand());
+    private RecipeToRecipeDto recipeToRecipeDto = new RecipeToRecipeDto(
+            new NotesToNotesDto(),
+            new IngredientToIngredientDto(new UnitOfMeasureToUnitOfMeasureDto()),
+            new CategoryToCategoryDto());
     private Recipe recipe;
 
     @Before
@@ -47,12 +47,12 @@ public class RecipeToRecipeCommandTest {
 
     @Test
     public void nullObject() {
-        assertNull(recipeToRecipeCommand.convert(null));
+        assertNull(recipeToRecipeDto.convert(null));
     }
 
     @Test
     public void convert() {
-        RecipeCommand command = recipeToRecipeCommand.convert(recipe);
+        RecipeDto command = recipeToRecipeDto.convert(recipe);
         assertNotNull(command);
         assertEquals(ID, command.getId());
         assertEquals(DESCRIPTION, command.getDescription());

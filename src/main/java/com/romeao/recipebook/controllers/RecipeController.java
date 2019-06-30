@@ -1,7 +1,7 @@
 package com.romeao.recipebook.controllers;
 
-import com.romeao.recipebook.commands.RecipeCommand;
 import com.romeao.recipebook.domain.Recipe;
+import com.romeao.recipebook.dto.RecipeDto;
 import com.romeao.recipebook.services.RecipeService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,14 +30,14 @@ public class RecipeController {
 
     @RequestMapping("/recipe/new")
     public String newRecipe(Model model) {
-        model.addAttribute("recipe", new RecipeCommand());
+        model.addAttribute("recipe", new RecipeDto());
 
         return "recipe/recipeForm";
     }
 
     @PostMapping("recipe")
-    public String saveOrUpdate(@ModelAttribute RecipeCommand command) {
-        RecipeCommand savedCommand = recipeService.saveRecipeCommand(command);
+    public String saveOrUpdate(@ModelAttribute RecipeDto command) {
+        RecipeDto savedCommand = recipeService.saveRecipeDto(command);
 
         return "redirect:/recipe/" + savedCommand.getId() + "/show";
     }

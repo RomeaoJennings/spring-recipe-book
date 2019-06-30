@@ -1,12 +1,12 @@
-package com.romeao.recipebook.commands;
+package com.romeao.recipebook.dto;
 
 import java.math.BigDecimal;
 
-public class IngredientCommand {
+public class IngredientDto {
     private Long id;
     private String description;
     private BigDecimal amount;
-    private UnitOfMeasureCommand unitOfMeasure;
+    private UnitOfMeasureDto unitOfMeasure;
 
     public Long getId() {
         return id;
@@ -32,11 +32,11 @@ public class IngredientCommand {
         this.amount = amount;
     }
 
-    public UnitOfMeasureCommand getUnitOfMeasure() {
+    public UnitOfMeasureDto getUnitOfMeasure() {
         return unitOfMeasure;
     }
 
-    public void setUnitOfMeasure(UnitOfMeasureCommand unitOfMeasure) {
+    public void setUnitOfMeasure(UnitOfMeasureDto unitOfMeasure) {
         this.unitOfMeasure = unitOfMeasure;
     }
 }

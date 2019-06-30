@@ -1,6 +1,6 @@
-package com.romeao.recipebook.commands;
+package com.romeao.recipebook.dto;
 
-public class CategoryCommand {
+public class CategoryDto {
     private Long id;
     private String description;
 

@@ -1,18 +1,18 @@
-package com.romeao.recipebook.converters;
+package com.romeao.recipebook.dto.converters;
 
-import com.romeao.recipebook.commands.CategoryCommand;
 import com.romeao.recipebook.domain.Category;
+import com.romeao.recipebook.dto.CategoryDto;
 import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class CategoryToCategoryCommandTest {
+public class CategoryToCategoryDtoTest {
 
     private static final Long ID = 1234L;
     private static final String DESCRIPTION = "testDescription";
 
-    private CategoryToCategoryCommand categoryToCategoryCommand = new CategoryToCategoryCommand();
+    private CategoryToCategoryDto categoryToCategoryDto = new CategoryToCategoryDto();
     private Category category;
 
     @Before
@@ -25,12 +25,12 @@ public class CategoryToCategoryCommandTest {
 
     @Test
     public void nullObject() {
-        assertNull(categoryToCategoryCommand.convert(null));
+        assertNull(categoryToCategoryDto.convert(null));
     }
 
     @Test
     public void convert() {
-        CategoryCommand command = categoryToCategoryCommand.convert(category);
+        CategoryDto command = categoryToCategoryDto.convert(category);
 
         assertNotNull(command);
         assertEquals(DESCRIPTION, command.getDescription());

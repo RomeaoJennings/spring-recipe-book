@@ -1,6 +1,6 @@
-package com.romeao.recipebook.commands;
+package com.romeao.recipebook.dto;
 
-public class UnitOfMeasureCommand {
+public class UnitOfMeasureDto {
     private Long id;
     private String description;
 

@@ -1,6 +1,6 @@
-package com.romeao.recipebook.commands;
+package com.romeao.recipebook.dto;
 
-public class NotesCommand {
+public class NotesDto {
 
     private Long id;
     private String notes;

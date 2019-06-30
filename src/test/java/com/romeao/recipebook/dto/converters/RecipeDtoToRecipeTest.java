@@ -1,15 +1,15 @@
-package com.romeao.recipebook.converters;
+package com.romeao.recipebook.dto.converters;
 
-import com.romeao.recipebook.commands.NotesCommand;
-import com.romeao.recipebook.commands.RecipeCommand;
 import com.romeao.recipebook.domain.Difficulty;
 import com.romeao.recipebook.domain.Recipe;
+import com.romeao.recipebook.dto.NotesDto;
+import com.romeao.recipebook.dto.RecipeDto;
 import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class RecipeCommandToRecipeTest {
+public class RecipeDtoToRecipeTest {
 
     private static final Long ID = 25L;
     private static final String DESCRIPTION = "test_description";
@@ -20,36 +20,36 @@ public class RecipeCommandToRecipeTest {
     private static final String URL = "test_url";
     private static final String DIRECTIONS = "test_directions";
     private static final Difficulty DIFFICULTY = Difficulty.MODERATE;
-    private static final NotesCommand NOTES = new NotesCommand();
+    private static final NotesDto NOTES = new NotesDto();
 
-    private RecipeCommandToRecipe recipeCommandToRecipe = new RecipeCommandToRecipe(
-            new IngredientCommandToIngredient(new UnitOfMeasureCommandToUnitOfMeasure()),
-            new CategoryCommandToCategory(), new NotesCommandToNotes());
-    private RecipeCommand command;
+    private RecipeDtoToRecipe recipeDtoToRecipe = new RecipeDtoToRecipe(
+            new IngredientDtoToIngredient(new UnitOfMeasureDtoToUnitOfMeasure()),
+            new CategoryDtoToCategory(), new NotesDtoToNotes());
+    private RecipeDto dto;
 
     @Before
     public void setUp() {
-        command = new RecipeCommand();
-        command.setId(ID);
-        command.setDescription(DESCRIPTION);
-        command.setCookTime(COOK_TIME);
-        command.setPrepTime(PREP_TIME);
-        command.setServings(SERVINGS);
-        command.setSource(SOURCE);
-        command.setUrl(URL);
-        command.setDirections(DIRECTIONS);
-        command.setDifficulty(DIFFICULTY);
-        command.setNotes(NOTES);
+        dto = new RecipeDto();
+        dto.setId(ID);
+        dto.setDescription(DESCRIPTION);
+        dto.setCookTime(COOK_TIME);
+        dto.setPrepTime(PREP_TIME);
+        dto.setServings(SERVINGS);
+        dto.setSource(SOURCE);
+        dto.setUrl(URL);
+        dto.setDirections(DIRECTIONS);
+        dto.setDifficulty(DIFFICULTY);
+        dto.setNotes(NOTES);
     }
 
     @Test
     public void nullObject() {
-        assertNull(recipeCommandToRecipe.convert(null));
+        assertNull(recipeDtoToRecipe.convert(null));
     }
 
     @Test
     public void convert() {
-        Recipe recipe = recipeCommandToRecipe.convert(command);
+        Recipe recipe = recipeDtoToRecipe.convert(dto);
         assertNotNull(recipe);
         assertEquals(ID, recipe.getId());
         assertEquals(DESCRIPTION, recipe.getDescription());
