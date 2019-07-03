@@ -3,6 +3,7 @@ package com.romeao.recipebook.controllers;
 import com.romeao.recipebook.domain.Ingredient;
 import com.romeao.recipebook.domain.Recipe;
 import com.romeao.recipebook.domain.UnitOfMeasure;
+import com.romeao.recipebook.dto.converters.*;
 import com.romeao.recipebook.services.RecipeService;
 import org.junit.Before;
 import org.junit.Test;
@@ -34,7 +35,10 @@ public class IndexControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        indexController = new IndexController(recipeService);
+        indexController = new IndexController(recipeService,
+                new RecipeToRecipeDto(new NotesToNotesDto(),
+                        new IngredientToIngredientDto(new UnitOfMeasureToUnitOfMeasureDto()),
+                        new CategoryToCategoryDto()));
     }
 
     @Test
@@ -69,7 +73,7 @@ public class IndexControllerTest {
 
         //then
         assertEquals("index", result);
-        verify(model, times(1)).addAttribute(eq("recipes"), eq(recipeSet));
+        verify(model, times(1)).addAttribute(eq("recipes"), any());
         verify(recipeService, times(1)).getAllRecipes();
     }
 }

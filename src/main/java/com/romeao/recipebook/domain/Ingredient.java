@@ -6,6 +6,8 @@ import java.math.BigDecimal;
 @Entity
 public class Ingredient {
 
+    private static final float THRESHHOLD = .00001f;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -59,6 +61,15 @@ public class Ingredient {
 
     public void setUnitOfMeasure(UnitOfMeasure unitOfMeasure) {
         this.unitOfMeasure = unitOfMeasure;
+    }
+
+    public String getDisplayName() {
+        String result = amount.toString() + " ";
+        if (unitOfMeasure != null) {
+            result += unitOfMeasure.getDescription() + " of ";
+        }
+        result += description;
+        return result;
     }
 
     public static IngredientBuilder builder() {

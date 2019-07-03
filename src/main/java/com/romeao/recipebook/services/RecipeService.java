@@ -1,7 +1,6 @@
 package com.romeao.recipebook.services;
 
 import com.romeao.recipebook.domain.Recipe;
-import com.romeao.recipebook.dto.RecipeDto;
 
 import java.util.Set;
 
@@ -10,6 +9,8 @@ public interface RecipeService {
 
     Recipe findById(Long id);
 
-    RecipeDto saveRecipeDto(RecipeDto recipeDto);
+    Recipe save(Recipe recipe);
+
+    void deleteById(Long id);
 }
 

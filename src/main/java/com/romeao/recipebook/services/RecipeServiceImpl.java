@@ -1,9 +1,6 @@
 package com.romeao.recipebook.services;
 
 import com.romeao.recipebook.domain.Recipe;
-import com.romeao.recipebook.dto.RecipeDto;
-import com.romeao.recipebook.dto.converters.RecipeDtoToRecipe;
-import com.romeao.recipebook.dto.converters.RecipeToRecipeDto;
 import com.romeao.recipebook.repositories.RecipeRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,15 +15,9 @@ public class RecipeServiceImpl implements RecipeService {
 
     private final Logger log = LoggerFactory.getLogger(RecipeServiceImpl.class);
     private final RecipeRepository recipeRepository;
-    private final RecipeDtoToRecipe recipeDtoToRecipe;
-    private final RecipeToRecipeDto recipeToRecipeDto;
 
-    public RecipeServiceImpl(RecipeRepository recipeRepository,
-                             RecipeDtoToRecipe recipeDtoToRecipe,
-                             RecipeToRecipeDto recipeToRecipeDto) {
+    public RecipeServiceImpl(RecipeRepository recipeRepository) {
         this.recipeRepository = recipeRepository;
-        this.recipeDtoToRecipe = recipeDtoToRecipe;
-        this.recipeToRecipeDto = recipeToRecipeDto;
     }
 
     @Override
@@ -43,10 +34,14 @@ public class RecipeServiceImpl implements RecipeService {
     }
 
     @Override
-    public RecipeDto saveRecipeDto(RecipeDto recipeDto) {
-        Recipe recipe = recipeDtoToRecipe.convert(recipeDto);
+    public Recipe save(Recipe recipe) {
         recipeRepository.save(recipe);
         log.info("Saved recipe with id: {}", recipe.getId());
-        return recipeToRecipeDto.convert(recipe);
+        return recipe;
+    }
+
+    @Override
+    public void deleteById(Long id) {
+        recipeRepository.deleteById(id);
     }
 }

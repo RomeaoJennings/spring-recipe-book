@@ -7,6 +7,7 @@ public class IngredientDto {
     private String description;
     private BigDecimal amount;
     private UnitOfMeasureDto unitOfMeasure;
+    private String displayName;
 
     public Long getId() {
         return id;
@@ -38,5 +39,13 @@ public class IngredientDto {
 
     public void setUnitOfMeasure(UnitOfMeasureDto unitOfMeasure) {
         this.unitOfMeasure = unitOfMeasure;
+    }
+
+    public String getDisplayName() {
+        return displayName;
+    }
+
+    public void setDisplayName(String displayName) {
+        this.displayName = displayName;
     }
 }

@@ -16,12 +16,13 @@ public class IngredientToIngredientDto implements Converter<Ingredient, Ingredie
     @Override
     public IngredientDto convert(Ingredient ingredient) {
         if (ingredient == null) { return null; } else {
-            IngredientDto command = new IngredientDto();
-            command.setId(ingredient.getId());
-            command.setAmount(ingredient.getAmount());
-            command.setDescription(ingredient.getDescription());
-            command.setUnitOfMeasure(unitOfMeasureConverter.convert(ingredient.getUnitOfMeasure()));
-            return command;
+            IngredientDto dto = new IngredientDto();
+            dto.setId(ingredient.getId());
+            dto.setAmount(ingredient.getAmount());
+            dto.setDescription(ingredient.getDescription());
+            dto.setUnitOfMeasure(unitOfMeasureConverter.convert(ingredient.getUnitOfMeasure()));
+            dto.setDisplayName(ingredient.getDisplayName());
+            return dto;
         }
     }
 }
