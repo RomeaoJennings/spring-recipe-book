@@ -21,12 +21,13 @@
                   </div>
                   <div class="col-auto">
                      <a class="btn btn-outline-dark" href="#" role="button"
-                        th:href="@{/recipe/new}">+</a>
+                        th:href="@{/recipes/new}">+</a>
                   </div>
                </div>
             </div>
             <div class="card-body">
-               <table class="table table-hover">
+               <table class="table table-hover table-striped"
+                      th:if="${not #lists.isEmpty(recipes)}">
                   <thead>
                   <tr>
                      <th>ID</th>
@@ -40,10 +41,10 @@
                   <tr th:each="recipe : ${recipes}">
                      <td th:text="${recipe.getId()}">789</td>
                      <td th:text="${recipe.getDescription()}">Tasty Goodness 1</td>
-                     <td><a href="#" th:href="@{'/recipe/' + ${recipe.id}}">View</a></td>
-                     <td><a href="#" th:href="@{'/recipe/' + ${recipe.id} + '/update'}">Update</a>
+                     <td><a href="#" th:href="@{|/recipe/${recipe.id}|}">View</a></td>
+                     <td><a href="#" th:href="@{|/recipe/${recipe.id}/update|}">Update</a>
                      </td>
-                     <td><a href="#" th:href="@{'/recipe/' + ${recipe.id} + '/delete'}">Delete</a>
+                     <td><a href="#" th:href="@{|/recipe/${recipe.id}/delete|}">Delete</a>
                      </td>
                   </tr>
                   <tr>
@@ -59,6 +60,11 @@
 
                   </tbody>
                </table>
+               <div th:if="${#lists.isEmpty(recipes)}">
+                  <h6 class="d-inline" style="white-space: pre">No Recipes Yet! </h6>
+                  <a class="btn btn-outline-dark" href="#" role="button"
+                     th:href="@{'/recipes/new'}">Add Some!</a>
+               </div>
             </div>
          </div>
       </div>

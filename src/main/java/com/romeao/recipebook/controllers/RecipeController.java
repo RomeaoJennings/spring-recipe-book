@@ -47,7 +47,7 @@ public class RecipeController {
         return "recipe/show";
     }
 
-    @GetMapping(path = "/recipe/new")
+    @GetMapping(path = "/recipes/new")
     public String newRecipe(Model model) {
         model.addAttribute("recipe", new RecipeDto());
         model.addAttribute("isNewRecipe", true);
@@ -64,13 +64,13 @@ public class RecipeController {
         return "recipe/recipeForm";
     }
 
-    @PostMapping(path = "recipe", params = {"saveRecipe", "!editIngredients"})
-    public String saveOrUpdateRecipe(@ModelAttribute RecipeDto command) {
+    @PostMapping(path = "/recipe", params = {"saveRecipe", "!editIngredients"})
+    public String updateRecipe(@ModelAttribute RecipeDto command) {
         Recipe savedRecipe = recipeService.save(toRecipeConverter.convert(command));
         return "redirect:/recipe/" + savedRecipe.getId();
     }
 
-    @PostMapping(path = "recipe", params = {"editIngredients", "!saveRecipe"})
+    @PostMapping(path = "/recipe", params = {"editIngredients", "!saveRecipe"})
     public String saveRecipeAndEditIngredients(@ModelAttribute RecipeDto recipeDto) {
         Recipe savedRecipe = recipeService.save(toRecipeConverter.convert(recipeDto));
         return "redirect:/recipe/" + savedRecipe.getId() + "/ingredients";

@@ -128,7 +128,7 @@
                      <div class="col-md-12">
                         <ul>
                            <li th:each="ingredient : ${recipe.ingredients}"
-                               th:text="${ingredient.description}">1 Cup of milk
+                               th:text="${ingredient.displayName}">1 Cup of milk
                            </li>
                            <li th:remove="all">1 Teaspoon of chocolate</li>
                            <li th:remove="all">1 Teaspoon of Sugar</li>
@@ -137,10 +137,11 @@
                   </div>
                </div>
             </div>
-            <button class="btn btn-primary"
-                    th:text="${isNewRecipe}? 'Save and add ingredients' : 'Submit'"
+            <button class="btn btn-outline-dark"
+                    th:text="${isNewRecipe}? 'Next: Add Ingredients' : 'Save Recipe'"
                     th:name="${isNewRecipe}? 'editIngredients' : 'saveRecipe'" type="submit">Submit
             </button>
+            <a class="btn btn-outline-dark" href="#" role="button" th:href="@{/recipes}">Cancel</a>
          </form>
       </div>
    </div>

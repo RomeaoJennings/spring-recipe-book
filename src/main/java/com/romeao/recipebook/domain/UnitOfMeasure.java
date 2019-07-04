@@ -1,6 +1,10 @@
 package com.romeao.recipebook.domain;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import java.util.Objects;
 
 @Entity
 public class UnitOfMeasure {
@@ -10,6 +14,10 @@ public class UnitOfMeasure {
     private Long id;
 
     private String description;
+
+    public static UnitOfMeasureBuilder builder() {
+        return new UnitOfMeasureBuilder();
+    }
 
     public Long getId() {
         return id;
@@ -27,8 +35,18 @@ public class UnitOfMeasure {
         this.description = description;
     }
 
-    public static UnitOfMeasureBuilder builder() {
-        return new UnitOfMeasureBuilder();
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) { return true; }
+        if (o == null || getClass() != o.getClass()) { return false; }
+        UnitOfMeasure unit = (UnitOfMeasure) o;
+        if (id != null) { return id == unit.id; }
+        return Objects.equals(description, unit.description);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, description);
     }
 
     public static final class UnitOfMeasureBuilder {

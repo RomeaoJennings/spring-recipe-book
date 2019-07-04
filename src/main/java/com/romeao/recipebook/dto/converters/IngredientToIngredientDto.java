@@ -5,6 +5,10 @@ import com.romeao.recipebook.dto.IngredientDto;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
 @Component
 public class IngredientToIngredientDto implements Converter<Ingredient, IngredientDto> {
     private final UnitOfMeasureToUnitOfMeasureDto unitOfMeasureConverter;
@@ -24,5 +28,13 @@ public class IngredientToIngredientDto implements Converter<Ingredient, Ingredie
             dto.setDisplayName(ingredient.getDisplayName());
             return dto;
         }
+    }
+
+    public List<IngredientDto> convertAll(Collection<Ingredient> ingredients) {
+        List<IngredientDto> list = new ArrayList<>();
+        if (ingredients != null) {
+            ingredients.forEach(ingredient -> list.add(convert(ingredient)));
+        }
+        return list;
     }
 }

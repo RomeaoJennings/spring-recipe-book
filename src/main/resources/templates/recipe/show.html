@@ -67,7 +67,7 @@
                   <div class="col-md-4"><h6 th:text="${recipe.source}">SimplyRecipes</h6></div>
                   <div class="col-md-2"><h6><strong>URL:</strong></h6></div>
                   <div class="col-md-4">
-                     <h6 th:text="${recipe.url}">http://www.example.com</h6>
+                     <h6><a th:href="${recipe.url}">Click Here</a></h6>
                   </div>
                </div>
             </div>
@@ -81,7 +81,7 @@
                   <div class="col-md-12">
                      <ul>
                         <li th:each="ingredient : ${recipe.ingredients}"
-                            th:text="${ingredient.description}">1 Cup of milk
+                            th:text="${ingredient.displayName}">1 Cup of milk
                         </li>
                         <li th:remove="all">1 Teaspoon of chocolate</li>
                         <li th:remove="all">1 Teaspoon of Sugar</li>

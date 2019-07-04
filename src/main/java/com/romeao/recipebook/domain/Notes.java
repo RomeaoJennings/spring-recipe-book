@@ -1,6 +1,7 @@
 package com.romeao.recipebook.domain;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 public class Notes {
@@ -14,6 +15,10 @@ public class Notes {
 
     @Lob
     private String notes;
+
+    public static NotesBuilder builder() {
+        return new NotesBuilder();
+    }
 
     public Long getId() {
         return id;
@@ -39,8 +44,20 @@ public class Notes {
         this.notes = notes;
     }
 
-    public static NotesBuilder builder() {
-        return new NotesBuilder();
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) { return true; }
+        if (o == null || getClass() != o.getClass()) { return false; }
+        Notes that = (Notes) o;
+        if (id != null) { return id == that.id; }
+        return Objects.equals(id, that.id) &&
+                Objects.equals(recipe, that.recipe) &&
+                Objects.equals(notes, that.notes);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, recipe, notes);
     }
 
     public static final class NotesBuilder {

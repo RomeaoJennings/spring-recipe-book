@@ -5,6 +5,10 @@ import com.romeao.recipebook.dto.UnitOfMeasureDto;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
 @Component
 public class UnitOfMeasureToUnitOfMeasureDto implements Converter<UnitOfMeasure,
         UnitOfMeasureDto> {
@@ -16,5 +20,12 @@ public class UnitOfMeasureToUnitOfMeasureDto implements Converter<UnitOfMeasure,
             command.setDescription(unitOfMeasure.getDescription());
             return command;
         }
+    }
+
+    public List<UnitOfMeasureDto> convertAll(Collection<UnitOfMeasure> unitsOfMeasure) {
+        List<UnitOfMeasureDto> list = new ArrayList<>();
+        if (unitsOfMeasure == null) { return null; }
+        unitsOfMeasure.forEach(uom -> list.add(convert(uom)));
+        return list;
     }
 }

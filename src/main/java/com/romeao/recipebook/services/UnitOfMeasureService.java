@@ -6,4 +6,6 @@ import java.util.Set;
 
 public interface UnitOfMeasureService {
     Set<UnitOfMeasure> getAllUnitsOfMeasure();
+
+    UnitOfMeasure findById(Long id);
 }

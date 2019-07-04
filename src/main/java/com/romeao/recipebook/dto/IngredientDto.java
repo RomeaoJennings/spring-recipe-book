@@ -6,7 +6,7 @@ public class IngredientDto {
     private Long id;
     private String description;
     private BigDecimal amount;
-    private UnitOfMeasureDto unitOfMeasure;
+    private UnitOfMeasureDto unitOfMeasure = new UnitOfMeasureDto();
     private String displayName;
 
     public Long getId() {

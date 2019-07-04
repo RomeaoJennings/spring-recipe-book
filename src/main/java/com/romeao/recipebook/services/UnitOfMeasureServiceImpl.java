@@ -22,4 +22,9 @@ public class UnitOfMeasureServiceImpl implements UnitOfMeasureService {
         repository.findAll().forEach(unitsOfMeasure::add);
         return unitsOfMeasure;
     }
+
+    @Override
+    public UnitOfMeasure findById(Long id) {
+        return repository.findById(id).orElse(null);
+    }
 }

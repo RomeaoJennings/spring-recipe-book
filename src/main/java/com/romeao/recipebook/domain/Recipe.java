@@ -3,6 +3,7 @@ package com.romeao.recipebook.domain;
 import javax.persistence.*;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -166,6 +167,34 @@ public class Recipe {
             category.getRecipes().add(this);
             categories.add(category);
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) { return true; }
+        if (o == null || getClass() != o.getClass()) { return false; }
+        Recipe recipe = (Recipe) o;
+        if (id != null) { return id == recipe.id; }
+        return Objects.equals(description, recipe.description) &&
+                Objects.equals(prepTime, recipe.prepTime) &&
+                Objects.equals(cookTime, recipe.cookTime) &&
+                Objects.equals(servings, recipe.servings) &&
+                Objects.equals(source, recipe.source) &&
+                Objects.equals(url, recipe.url) &&
+                Objects.equals(directions, recipe.directions) &&
+                difficulty == recipe.difficulty &&
+                Objects.equals(categories, recipe.categories) &&
+                Objects.equals(ingredients, recipe.ingredients) &&
+                Arrays.equals(image, recipe.image) &&
+                Objects.equals(notes, recipe.notes);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = Objects.hash(id, description, prepTime, cookTime, servings, source, url,
+                directions, difficulty, categories, ingredients, notes);
+        result = 31 * result + Arrays.hashCode(image);
+        return result;
     }
 
     public static final class RecipeBuilder {
