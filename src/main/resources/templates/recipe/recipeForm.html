@@ -112,7 +112,16 @@
             </div>
             <div class="card mb-2" th:if="${not isNewRecipe}">
                <div class="card-header">
-                  <h5 class="card-title mb-0">Ingredients</h5>
+                  <div class="row">
+                     <div class="col-auto mr-auto">
+                        <h5 class="card-title mb-0">Ingredients</h5>
+                     </div>
+                     <div class="col-auto">
+                        <button class="btn btn-outline-dark" name="editIngredients" type="submit">
+                           Edit
+                        </button>
+                     </div>
+                  </div>
                </div>
                <div class="card-body">
                   <div class="row">
@@ -130,7 +139,7 @@
             </div>
             <button class="btn btn-primary"
                     th:text="${isNewRecipe}? 'Save and add ingredients' : 'Submit'"
-                    type="submit">Submit
+                    th:name="${isNewRecipe}? 'editIngredients' : 'saveRecipe'" type="submit">Submit
             </button>
          </form>
       </div>
