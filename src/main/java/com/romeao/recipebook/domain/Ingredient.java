@@ -2,6 +2,7 @@ package com.romeao.recipebook.domain;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.Objects;
 
 @Entity
 public class Ingredient {
@@ -22,6 +23,10 @@ public class Ingredient {
     private UnitOfMeasure unitOfMeasure;
 
     public Ingredient() {}
+
+    public static IngredientBuilder builder() {
+        return new IngredientBuilder();
+    }
 
     public Long getId() {
         return id;
@@ -72,8 +77,21 @@ public class Ingredient {
         return result;
     }
 
-    public static IngredientBuilder builder() {
-        return new IngredientBuilder();
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) { return true; }
+        if (o == null || getClass() != o.getClass()) { return false; }
+        Ingredient that = (Ingredient) o;
+        if (id != null) { return id == that.id; }
+        return Objects.equals(description, that.description) &&
+                Objects.equals(amount, that.amount) &&
+                Objects.equals(recipe, that.recipe) &&
+                Objects.equals(unitOfMeasure, that.unitOfMeasure);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, description, amount, unitOfMeasure);
     }
 
     public final static class IngredientBuilder {
