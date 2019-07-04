@@ -110,12 +110,14 @@ public class DataInitializer implements CommandLineRunner {
         Optional<UnitOfMeasure> tablespoon = unitOfMeasureRepository.findByDescription(
                 "Tablespoon");
         Optional<UnitOfMeasure> dash = unitOfMeasureRepository.findByDescription("Dash");
+        Optional<UnitOfMeasure> none = unitOfMeasureRepository.findByDescription("N/A");
 
         Optional<Category> mexican = categoryRepository.findByDescription("Mexican");
 
         Ingredient ripeAvocados = Ingredient.builder()
                 .description("Ripe avocados")
                 .amount(2)
+                .unitOfMeasure(none.get())
                 .build();
 
         Ingredient kosherSalt = Ingredient.builder()
@@ -139,6 +141,7 @@ public class DataInitializer implements CommandLineRunner {
         Ingredient serranoChile = Ingredient.builder()
                 .description("Serrano chiles")
                 .amount(2)
+                .unitOfMeasure(none.get())
                 .build();
 
         Ingredient cilantro = Ingredient.builder()
@@ -156,6 +159,7 @@ public class DataInitializer implements CommandLineRunner {
         Ingredient tomato = Ingredient.builder()
                 .description("Ripe tomato")
                 .amount(0.5)
+                .unitOfMeasure(none.get())
                 .build();
 
         Recipe guacamole = Recipe.builder()

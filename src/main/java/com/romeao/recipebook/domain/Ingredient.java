@@ -65,7 +65,7 @@ public class Ingredient {
 
     public String getDisplayName() {
         String result = amount.toString() + " ";
-        if (unitOfMeasure != null) {
+        if (unitOfMeasure != null && !unitOfMeasure.getDescription().equals("N/A")) {
             result += unitOfMeasure.getDescription() + " of ";
         }
         result += description;
