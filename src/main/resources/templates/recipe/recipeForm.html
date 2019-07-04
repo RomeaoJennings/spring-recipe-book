@@ -9,13 +9,21 @@
          rel="stylesheet" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}"/>
 </head>
 <body>
+<nav aria-label="breadcrumb">
+   <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="#" th:href="@{/recipes}">Home</a></li>
+      <li aria-current="page" class="breadcrumb-item active"
+          th:text="${not isNewRecipe}? ${recipe.description} : 'New Recipe'">New Recipe
+      </li>
+   </ol>
+</nav>
 <div class="container-fluid">
    <div class="row">
       <div class="col-md-10 offset-md-1">
          <form method="post" th:action="@{/recipe/}" th:object="${recipe}">
             <div class="card my-2">
-               <div class="card-header bg-primary text-white">
-                  <h3 class="card-title mb-0">Edit Recipe Information</h3>
+               <div class="card-header">
+                  <h5 class="card-title mb-0">Edit Recipe Information</h5>
                </div>
                <div class="card-body">
                   <input th:field="*{id}" type="hidden"/>
@@ -102,9 +110,9 @@
                   </div>
                </div>
             </div>
-            <div class="card mb-2">
-               <div class="card-header bg-primary text-white">
-                  <h3 class="card-title mb-0">Ingredients</h3>
+            <div class="card mb-2" th:if="${not isNewRecipe}">
+               <div class="card-header">
+                  <h5 class="card-title mb-0">Ingredients</h5>
                </div>
                <div class="card-body">
                   <div class="row">
@@ -120,7 +128,10 @@
                   </div>
                </div>
             </div>
-            <button class="btn btn-primary" type="submit">Submit</button>
+            <button class="btn btn-primary"
+                    th:text="${isNewRecipe}? 'Save and add ingredients' : 'Submit'"
+                    type="submit">Submit
+            </button>
          </form>
       </div>
    </div>

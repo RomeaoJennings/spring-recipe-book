@@ -10,7 +10,14 @@
 
 </head>
 <body>
-
+<nav aria-label="breadcrumb">
+   <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="#" th:href="@{/recipes}">Home</a></li>
+      <li class="breadcrumb-item"><a href="#" th:href="@{'/recipe/' + ${recipeId}}"
+                                     th:text="${recipeDescription}">Recipe Description</a></li>
+      <li aria-current="page" class="breadcrumb-item active">Ingredients</li>
+   </ol>
+</nav>
 <div class="container mt-3">
    <div class="row">
       <div class="col-md-10 offset-md-1">
@@ -43,11 +50,15 @@
                      <td>123</td>
                      <td>Tasty Goodness 2</td>
                      <td><a href="#">View</a></td>
+                     <td><a href="#">Update</a></td>
+                     <td><a href="#">Delete</a></td>
                   </tr>
                   <tr>
                      <td>456</td>
                      <td>Tasty Goodness 3</td>
                      <td><a href="#">View</a></td>
+                     <td><a href="#">Update</a></td>
+                     <td><a href="#">Delete</a></td>
                   </tr>
 
                   </tbody>
