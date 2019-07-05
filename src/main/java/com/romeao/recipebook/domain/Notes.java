@@ -57,7 +57,7 @@ public class Notes {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, recipe, notes);
+        return Objects.hash(id, notes);
     }
 
     public static final class NotesBuilder {
