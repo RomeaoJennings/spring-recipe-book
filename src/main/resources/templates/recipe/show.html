@@ -53,7 +53,11 @@
                   <div class="col-md-4"><h6 th:text="${recipe.prepTime} + ' minutes'">30 min</h6>
                   </div>
                   <div class="col-md-2"><h6><strong>Difficulty:</strong></h6></div>
-                  <div class="col-md-4"><h6 th:text="${recipe.difficulty}">Easy</h6></div>
+                  <div class="col-md-4">
+                     <h6 th:text="${#strings.capitalize(#strings.toLowerCase(recipe.difficulty))}">
+                        Easy
+                     </h6>
+                  </div>
                </div>
                <div class="row">
                   <div class="col-md-2"><h6><strong>Cook time:</strong></h6></div>
@@ -119,8 +123,8 @@
             </div>
          </div>
          <div class="card mb-2">
-            <div class="card-header bg-primary text-white">
-               <h3 class="card-title mb-0">Notes</h3>
+            <div class="card-header">
+               <h5 class="card-title mb-0">Notes</h5>
             </div>
             <div class="card-body">
                <div class="row">

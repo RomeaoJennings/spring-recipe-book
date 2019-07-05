@@ -75,7 +75,11 @@
                      </div>
                      <div class="col-md-6 form-group">
                         <label for="recipeDifficulty">Difficulty:</label>
-                        <select class="form-control" id="recipeDifficulty">
+                        <select class="form-control" id="recipeDifficulty" th:field="*{difficulty}"
+                                th:remove="all-but-first">
+                           <option th:each="difficulty : ${T(com.romeao.recipebook.domain.Difficulty).values()}"
+                                   th:text="${#strings.capitalize(#strings.toLowerCase(difficulty))}"
+                                   th:value="${difficulty}"></option>
                            <option>Easy</option>
                            <option>Moderate</option>
                            <option>Hard</option>
