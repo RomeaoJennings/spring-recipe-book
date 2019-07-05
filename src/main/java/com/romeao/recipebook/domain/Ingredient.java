@@ -69,10 +69,16 @@ public class Ingredient {
     }
 
     public String getDisplayName() {
+        if (amount == null || unitOfMeasure == null || unitOfMeasure.getDescription() == null) {
+            return "";
+        }
         String result = amount.toString() + " ";
-        if (unitOfMeasure != null && !unitOfMeasure.getDescription().equals("N/A")) {
+
+        // Add Unit of Measure to string if it is not "N/A"
+        if (!unitOfMeasure.getDescription().equals("N/A")) {
             result += unitOfMeasure.getDescription() + " of ";
         }
+
         result += description;
         return result;
     }

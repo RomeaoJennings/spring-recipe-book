@@ -2,8 +2,7 @@ package com.romeao.recipebook.controllers;
 
 import com.romeao.recipebook.domain.Recipe;
 import com.romeao.recipebook.dto.RecipeDto;
-import com.romeao.recipebook.dto.converters.RecipeDtoToRecipe;
-import com.romeao.recipebook.dto.converters.RecipeToRecipeDto;
+import com.romeao.recipebook.dto.converters.RecipeConverter;
 import com.romeao.recipebook.services.RecipeService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,22 +18,16 @@ import java.util.Set;
 public class RecipeController {
 
     private final RecipeService recipeService;
-    private final RecipeDtoToRecipe toRecipeConverter;
-    private final RecipeToRecipeDto toRecipeDtoConverter;
 
-    public RecipeController(RecipeService recipeService,
-                            RecipeDtoToRecipe toRecipeConverter,
-                            RecipeToRecipeDto toRecipeDtoConverter) {
+    public RecipeController(RecipeService recipeService) {
         this.recipeService = recipeService;
-        this.toRecipeConverter = toRecipeConverter;
-        this.toRecipeDtoConverter = toRecipeDtoConverter;
     }
 
     @GetMapping(path = "/recipes")
     public String getIndexPage(Model model) {
         Set<RecipeDto> recipes = new HashSet<>();
         recipeService.getAllRecipes()
-                .forEach(recipe -> recipes.add(toRecipeDtoConverter.convert(recipe)));
+                .forEach(recipe -> recipes.add(RecipeConverter.toDto(recipe)));
         model.addAttribute("recipes", recipes);
         return "recipe/manage";
     }
@@ -66,14 +59,14 @@ public class RecipeController {
     }
 
     @PostMapping(path = "/recipe", params = {"saveRecipe", "!editIngredients"})
-    public String updateRecipe(@ModelAttribute RecipeDto command) {
-        Recipe savedRecipe = recipeService.save(toRecipeConverter.convert(command));
+    public String updateRecipe(@ModelAttribute RecipeDto dto) {
+        Recipe savedRecipe = recipeService.save(RecipeConverter.toRecipe(dto));
         return "redirect:/recipe/" + savedRecipe.getId();
     }
 
     @PostMapping(path = "/recipe", params = {"editIngredients", "!saveRecipe"})
     public String saveRecipeAndEditIngredients(@ModelAttribute RecipeDto recipeDto) {
-        Recipe savedRecipe = recipeService.save(toRecipeConverter.convert(recipeDto));
+        Recipe savedRecipe = recipeService.save(RecipeConverter.toRecipe(recipeDto));
         return "redirect:/recipe/" + savedRecipe.getId() + "/ingredients";
     }
 

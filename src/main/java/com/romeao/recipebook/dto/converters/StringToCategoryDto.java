@@ -12,17 +12,14 @@ import java.util.Optional;
 public class StringToCategoryDto implements Converter<String, CategoryDto> {
 
     private final CategoryRepository categoryRepository;
-    private final CategoryToCategoryDto toCategoryDto;
 
-    public StringToCategoryDto(CategoryRepository categoryRepository,
-                               CategoryToCategoryDto toCategoryDto) {
+    public StringToCategoryDto(CategoryRepository categoryRepository) {
         this.categoryRepository = categoryRepository;
-        this.toCategoryDto = toCategoryDto;
     }
 
     @Override
     public CategoryDto convert(String id) {
         Optional<Category> categoryOptional = categoryRepository.findById(Long.valueOf(id));
-        return toCategoryDto.convert(categoryOptional.orElse(null));
+        return CategoryConverter.toDto(categoryOptional.orElse(null));
     }
 }

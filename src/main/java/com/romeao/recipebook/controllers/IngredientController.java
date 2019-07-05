@@ -3,9 +3,8 @@ package com.romeao.recipebook.controllers;
 import com.romeao.recipebook.domain.Ingredient;
 import com.romeao.recipebook.domain.Recipe;
 import com.romeao.recipebook.dto.IngredientDto;
-import com.romeao.recipebook.dto.converters.IngredientDtoToIngredient;
-import com.romeao.recipebook.dto.converters.IngredientToIngredientDto;
-import com.romeao.recipebook.dto.converters.UnitOfMeasureToUnitOfMeasureDto;
+import com.romeao.recipebook.dto.converters.IngredientConverter;
+import com.romeao.recipebook.dto.converters.UnitOfMeasureConverter;
 import com.romeao.recipebook.services.IngredientService;
 import com.romeao.recipebook.services.RecipeService;
 import com.romeao.recipebook.services.UnitOfMeasureService;
@@ -24,29 +23,20 @@ public class IngredientController {
     private final IngredientService ingredientService;
     private final RecipeService recipeService;
     private final UnitOfMeasureService unitOfMeasureService;
-    private final IngredientToIngredientDto toIngredientDto;
-    private final IngredientDtoToIngredient toIngredient;
-    private final UnitOfMeasureToUnitOfMeasureDto toUnitOfMeasureDto;
 
     public IngredientController(IngredientService ingredientService,
                                 RecipeService recipeService,
-                                UnitOfMeasureService unitOfMeasureService,
-                                IngredientToIngredientDto toIngredientDto,
-                                IngredientDtoToIngredient toIngredient,
-                                UnitOfMeasureToUnitOfMeasureDto toUnitOfMeasureDto) {
+                                UnitOfMeasureService unitOfMeasureService) {
         this.ingredientService = ingredientService;
         this.recipeService = recipeService;
         this.unitOfMeasureService = unitOfMeasureService;
-        this.toIngredientDto = toIngredientDto;
-        this.toIngredient = toIngredient;
-        this.toUnitOfMeasureDto = toUnitOfMeasureDto;
     }
 
     @GetMapping(path = "/recipe/{id}/ingredients")
     public String manageIngredients(@PathVariable Long id, Model model) {
         Recipe recipe = recipeService.findById(id);
         List<IngredientDto> ingredients =
-                toIngredientDto.convertAll(ingredientService.getAllIngredients(id));
+                IngredientConverter.convertAllIngredients(ingredientService.getAllIngredients(id));
         model.addAttribute("ingredients", ingredients);
         model.addAttribute("recipeId", id);
         model.addAttribute("recipeDescription", recipe.getDescription());
@@ -58,12 +48,13 @@ public class IngredientController {
                                    @PathVariable Long ingredientId,
                                    Model model) {
         Ingredient ingredient = ingredientService.getIngredient(ingredientId);
-        model.addAttribute("ingredient", toIngredientDto.convert(ingredient));
+        model.addAttribute("ingredient", IngredientConverter.toDto(ingredient));
         model.addAttribute("recipeId", recipeId);
         model.addAttribute("recipeDescription", ingredient.getRecipe().getDescription());
         model.addAttribute("isNewIngredient", false);
         model.addAttribute("unitsOfMeasure",
-                toUnitOfMeasureDto.convertAll(unitOfMeasureService.getAllUnitsOfMeasure()));
+                UnitOfMeasureConverter.convertAllUnitsOfMeasure(
+                        unitOfMeasureService.getAllUnitsOfMeasure()));
         return "recipe/ingredient/ingredientForm";
     }
 
@@ -76,7 +67,8 @@ public class IngredientController {
         model.addAttribute("recipeDescription", recipe.getDescription());
         model.addAttribute("isNewIngredient", true);
         model.addAttribute("unitsOfMeasure",
-                toUnitOfMeasureDto.convertAll(unitOfMeasureService.getAllUnitsOfMeasure()));
+                UnitOfMeasureConverter.convertAllUnitsOfMeasure(
+                        unitOfMeasureService.getAllUnitsOfMeasure()));
         return "recipe/ingredient/ingredientForm";
     }
 
@@ -84,7 +76,8 @@ public class IngredientController {
     public String saveOrUpdateIngredient(@PathVariable Long recipeId,
                                          @ModelAttribute IngredientDto ingredientDto) {
         Recipe recipe = recipeService.findById(recipeId);
-        Ingredient ingredient = ingredientService.save(toIngredient.convert(ingredientDto));
+        Ingredient ingredient =
+                ingredientService.save(IngredientConverter.toIngredient(ingredientDto));
         recipe.addIngredients(ingredient);
         recipeService.save(recipe);
         return "redirect:/recipe/" + recipeId + "/ingredients";
