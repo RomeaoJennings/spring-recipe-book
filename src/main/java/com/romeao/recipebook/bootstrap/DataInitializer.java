@@ -77,11 +77,21 @@ public class DataInitializer implements CommandLineRunner {
                 .unitOfMeasure(pinch.get())
                 .build();
 
+        Notes notes = Notes.builder()
+                .notes("My mom insists that the trick to the tomatoes is the sugar, and I agree. " +
+                        "Tomatoes are naturally acidic. You need to add sugar to balance the " +
+                        "acidity and this particular dish should be a little on the sweet side, " +
+                        "which is why we add sugar.\n\nUse the best quality canned tomatoes " +
+                        "available. We recommend Muir Glen brand or San Marzano. The sauce has so" +
+                        " few ingredients, it's important that the tomatoes you use are high " +
+                        "quality. Cheap, generic canned tomatoes just will not taste as good.")
+                .build();
+
         Recipe butteryTomatoPasta = Recipe.builder()
                 .description("Buttery Tomato Pasta")
                 .cookTime(20)
                 .prepTime(5)
-                .difficulty(Difficulty.EASY)
+                .difficulty(Difficulty.MODERATE)
                 .addCategories(italian.get())
                 .servings(4)
                 .source("SimplyRecipes")
@@ -99,6 +109,7 @@ public class DataInitializer implements CommandLineRunner {
                         "pinch of dried basil.\n\n3 Drain the pasta, combine with the tomatoes: " +
                         "When the pasta is done, drain it. Stir in the cooked tomatoes and put in" +
                         " a serving bowl.\n\nServe immediately.")
+                .notes(notes)
                 .addIngredients(pasta, tomatoes, butter, sugar, salt, basil)
                 .build();
 
@@ -162,6 +173,12 @@ public class DataInitializer implements CommandLineRunner {
                 .unitOfMeasure(none.get())
                 .build();
 
+        Notes notes = Notes.builder()
+                .notes("Be careful handling chiles if using. Wash your hands thoroughly after " +
+                        "handling and do not touch your eyes or the area near your eyes with your" +
+                        " hands for several hours.")
+                .build();
+
         Recipe guacamole = Recipe.builder()
                 .description("Perfect Guacamole")
                 .cookTime(0)
@@ -190,6 +207,7 @@ public class DataInitializer implements CommandLineRunner {
                         " guacamole brown.) Refrigerate until ready to serve.\n\nChilling " +
                         "tomatoes hurts their flavor, so if you want to add chopped tomato to " +
                         "your guacamole, add it just before serving.")
+                .notes(notes)
                 .addIngredients(ripeAvocados, kosherSalt, lime, redOnion, serranoChile, cilantro
                         , pepper, tomato)
                 .build();

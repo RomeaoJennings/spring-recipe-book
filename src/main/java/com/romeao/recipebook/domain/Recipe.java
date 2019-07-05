@@ -297,6 +297,7 @@ public class Recipe {
             recipe.setNotes(notes);
 
             for (Ingredient ingredient : recipe.getIngredients()) { ingredient.setRecipe(recipe); }
+            notes.setRecipe(recipe);
 
             return recipe;
         }
