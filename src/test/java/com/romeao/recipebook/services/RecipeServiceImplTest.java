@@ -1,6 +1,7 @@
 package com.romeao.recipebook.services;
 
 import com.romeao.recipebook.domain.Recipe;
+import com.romeao.recipebook.repositories.CategoryRepository;
 import com.romeao.recipebook.repositories.RecipeRepository;
 import org.junit.Before;
 import org.junit.Test;
@@ -24,6 +25,9 @@ public class RecipeServiceImplTest {
     @Mock
     private RecipeRepository recipeRepository;
 
+    @Mock
+    private CategoryRepository categoryRepository;
+
     private RecipeService recipeService;
 
     private List<Recipe> recipes;
@@ -31,7 +35,7 @@ public class RecipeServiceImplTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        recipeService = new RecipeServiceImpl(recipeRepository);
+        recipeService = new RecipeServiceImpl(recipeRepository, categoryRepository);
 
         recipes = new ArrayList<>();
         recipes.add(Recipe.builder().id(FIRST_ID).description("Recipe1").build());

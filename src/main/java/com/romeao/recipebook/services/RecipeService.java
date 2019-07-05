@@ -1,7 +1,9 @@
 package com.romeao.recipebook.services;
 
+import com.romeao.recipebook.domain.Category;
 import com.romeao.recipebook.domain.Recipe;
 
+import java.util.List;
 import java.util.Set;
 
 public interface RecipeService {
@@ -12,5 +14,7 @@ public interface RecipeService {
     Recipe save(Recipe recipe);
 
     void deleteById(Long id);
+
+    List<Category> getAllCategories();
 }
 

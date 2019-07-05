@@ -61,6 +61,7 @@ public class RecipeController {
         if (recipe == null) { return "redirect:/"; }
         model.addAttribute("recipe", recipe);
         model.addAttribute("isNewRecipe", false);
+        model.addAttribute("allCategories", recipeService.getAllCategories());
         return "recipe/recipeForm";
     }
 
