@@ -35,9 +35,6 @@ public class Recipe {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
     private Set<Ingredient> ingredients = new HashSet<>();
 
-    @Lob
-    private Byte[] image;
-
     @OneToOne(cascade = CascadeType.ALL)
     private Notes notes = new Notes();
 
@@ -133,14 +130,6 @@ public class Recipe {
         this.ingredients = ingredients;
     }
 
-    public Byte[] getImage() {
-        return image;
-    }
-
-    public void setImage(Byte[] image) {
-        this.image = image;
-    }
-
     public Notes getNotes() {
         return notes;
     }
@@ -185,16 +174,13 @@ public class Recipe {
                 difficulty == recipe.difficulty &&
                 Objects.equals(categories, recipe.categories) &&
                 Objects.equals(ingredients, recipe.ingredients) &&
-                Arrays.equals(image, recipe.image) &&
                 Objects.equals(notes, recipe.notes);
     }
 
     @Override
     public int hashCode() {
-        int result = Objects.hash(id, description, prepTime, cookTime, servings, source, url,
+        return Objects.hash(id, description, prepTime, cookTime, servings, source, url,
                 directions, difficulty, categories, ingredients, notes);
-        result = 31 * result + Arrays.hashCode(image);
-        return result;
     }
 
     public static final class RecipeBuilder {
@@ -209,7 +195,6 @@ public class Recipe {
         private Difficulty difficulty;
         private Set<Category> categories = new HashSet<>();
         private Set<Ingredient> ingredients = new HashSet<>();
-        private Byte[] image;
         private Notes notes = new Notes();
 
         private RecipeBuilder() {}
@@ -270,11 +255,6 @@ public class Recipe {
             return this;
         }
 
-        public RecipeBuilder image(Byte[] image) {
-            this.image = image;
-            return this;
-        }
-
         public RecipeBuilder notes(Notes notes) {
             this.notes = notes;
             return this;
@@ -293,7 +273,6 @@ public class Recipe {
             recipe.setDifficulty(difficulty);
             recipe.setCategories(categories);
             recipe.setIngredients(ingredients);
-            recipe.setImage(image);
             recipe.setNotes(notes);
 
             for (Ingredient ingredient : recipe.getIngredients()) { ingredient.setRecipe(recipe); }

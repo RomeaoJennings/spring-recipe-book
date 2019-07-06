@@ -25,8 +25,7 @@ public class RecipeConverter {
 
         recipeDto.getCategories()
                 .forEach(cat -> recipe.addCategories(CategoryConverter.toCategory(cat)));
-        recipeDto.getIngredients().forEach(ingredient -> recipe.addIngredients(IngredientConverter
-                .toIngredient(ingredient)));
+        recipeDto.getIngredients().forEach(ingredient -> recipe.addIngredients(IngredientConverter.toIngredient(ingredient)));
         return recipe;
     }
 
